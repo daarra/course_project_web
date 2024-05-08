@@ -57,7 +57,7 @@ public class Task1 {
 
 
 
-        // Шаг 6: Добавить новый элемент списка
+// Шаг 6: Добавить новый элемент списка
         // Ввод текста в форму перед добавлением элемента
         String newItemText = "Новый элемент списка";
         WebElement inputField = driver.findElement(By.xpath("//input[@placeholder='Want to add more']"));
@@ -66,21 +66,26 @@ public class Task1 {
         // Нахождение кнопки "Add" по значению атрибута "value" и нажатие на нее
         WebElement addButton = driver.findElement(By.xpath("//input[@value='add']"));
         addButton.click();
+        int new_item = 1;
+        listItemsCount += 1;
 
-        WebElement sixthListItem = driver.findElement(By.xpath("//li[6]"));
+        WebElement sixthListItem = driver.findElement(By.xpath("//li[" + (listItemsCount) + "]"));
         WebElement spanElement = sixthListItem.findElement(By.tagName("span"));
         String spanClassAttributeValue = spanElement.getAttribute("class");
         Assert.assertTrue("Шестой элемент списка зачеркнут", spanClassAttributeValue.contains("done-false"));
-        remainingTextElement = driver.findElement(By.xpath("//span[contains(text(), '1 of 6')]"));
-        Assert.assertTrue("Текст '1 of 6 remaining' не найден на странице", remainingTextElement.isDisplayed());
-        WebElement sixthItemCheckbox = driver.findElement(By.xpath("//li[6]//input[@type='checkbox']"));
+        remainingTextElement = driver.findElement(By.xpath("//span[contains(text(), '1 of " + listItemsCount + "')]"));
+        Assert.assertTrue("Текст '" + new_item + " of " + listItemsCount + " remaining' не найден на странице", remainingTextElement.isDisplayed());
+        WebElement sixthItemCheckbox = driver.findElement(By.xpath("//li[" + listItemsCount + "]//input[@type='checkbox']"));
         sixthItemCheckbox.click();
-        remainingTextElement = driver.findElement(By.xpath("//span[contains(text(), '0 of 6')]"));
-        Assert.assertTrue("Текст '0 of 6 remaining' не найден на странице", remainingTextElement.isDisplayed());
-        sixthListItem = driver.findElement(By.xpath("//li[6]"));
+        new_item--;
+        remainingTextElement = driver.findElement(By.xpath("//span[contains(text(), '0 of " + listItemsCount + "')]"));
+        Assert.assertTrue("Текст '" + new_item + " of " + listItemsCount + " remaining' не найден на странице", remainingTextElement.isDisplayed());
+        sixthListItem = driver.findElement(By.xpath("//li[" + listItemsCount + "]"));
         spanElement = sixthListItem.findElement(By.tagName("span"));
         spanClassAttributeValue = spanElement.getAttribute("class");
         Assert.assertTrue("Шестой элемент списка не становится зачеркнутым", spanClassAttributeValue.contains("done-true"));
+
+
 
 
         try{
