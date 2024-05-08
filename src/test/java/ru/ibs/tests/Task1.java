@@ -28,11 +28,11 @@ public class Task1 {
         WebElement remainingTextElement = driver.findElement(By.xpath("//span[contains(text(), '5 of 5 remaining')]"));
         Assert.assertTrue("Текст '5 of 5 remaining' не найден на странице", remainingTextElement.isDisplayed() && remainingTextElement.getText().contains("5 of 5 remaining"));
 
-        // Получаем количество элементов списка
+// Получаем количество элементов списка
         List<WebElement> listItems = driver.findElements(By.xpath("//li"));
         int listItemsCount = listItems.size();
 
-        for (int i = listItemsCount; i >= 1; i--) {
+        for (int i = 1; i <= listItemsCount; i++) {
             WebElement listItem = driver.findElement(By.xpath("//li[" + i + "]"));
             WebElement spanElement = listItem.findElement(By.tagName("span"));
             String spanClassAttributeValue = spanElement.getAttribute("class");
@@ -42,8 +42,9 @@ public class Task1 {
             WebElement itemCheckbox = driver.findElement(By.xpath("//li[" + i + "]//input[@type='checkbox']"));
             itemCheckbox.click();
 
+
             // Проверяем, что текст счетчика изменился
-            String expectedRemainingText = (i - 1) + " of " + listItemsCount + " remaining";
+            String expectedRemainingText = (listItemsCount - i) + " of " + listItemsCount + " remaining";
             WebElement remainingTextElement1 = driver.findElement(By.xpath("//span[contains(text(), '" + expectedRemainingText + "')]"));
             Assert.assertTrue("Текст '" + expectedRemainingText + "' не найден на странице", remainingTextElement1.isDisplayed());
 
@@ -53,6 +54,7 @@ public class Task1 {
             spanClassAttributeValue = spanElement.getAttribute("class");
             Assert.assertTrue("Элемент списка " + i + " не становится зачеркнутым", spanClassAttributeValue.contains("done-true"));
         }
+
 
 
         // Шаг 6: Добавить новый элемент списка
