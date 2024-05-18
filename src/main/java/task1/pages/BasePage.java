@@ -1,4 +1,4 @@
-package task1;
+package task1.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -8,12 +8,15 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import task1.managers.DriverManager;
+import task1.managers.PageManager;
 
 import java.time.Duration;
 
 public class BasePage {
     protected final DriverManager driverManager = DriverManager.getInstance();
+    protected PageManager pageManager = PageManager.getInstance();
     protected WebDriverWait wait = new WebDriverWait(driverManager.getDriver(), Duration.ofSeconds(10), Duration.ofMillis(1000));
+
 
     public BasePage() {
         PageFactory.initElements(driverManager.getDriver(), this);

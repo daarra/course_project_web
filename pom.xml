@@ -98,6 +98,27 @@
             <scope>test</scope>
         </dependency>
 
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>2.21.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>2.21.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+
         <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
         <dependency>
             <groupId>org.aspectj</groupId>
@@ -116,6 +137,20 @@
             <version>4.13.2</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-java-commons</artifactId>
+            <version>2.21.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
+        <dependency>
+            <groupId>org.jsoup</groupId>
+            <artifactId>jsoup</artifactId>
+            <version>1.17.2</version>
+        </dependency>
+
 
     </dependencies>
 
@@ -141,26 +176,25 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
+                    <skip>false</skip>
+                    <skipTests>false</skipTests>
                     <testFailureIgnore>true</testFailureIgnore>
-                    <includes>**/*CucumberRunner.java</includes>
-                    <!--suppress UnresolvedMavenProperty -->
+                    <includes>**/*Test.java</includes>
                     <argLine>
-                        -Xmx1024m
                         -Dfile.encoding=${encoding.type}
-                        -javaagent:"${settings.localRepository}\org\aspectj\aspectjweaver\${aspectj.version}\aspectjweaver-${aspectj.version}.jar"
+                        -javaagent:"${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar"
                     </argLine>
                     <systemPropertyVariables>
-                        <allure.results.directory>${project.build.directory}\reports\allure-results</allure.results.directory>
+                        <allure.results.directory>${project.build.directory}/reports/allure-results</allure.results.directory>
                     </systemPropertyVariables>
                     <properties>
                         <property>
                             <name>listener</name>
-                            <value>io.qameta.allure.junit4.AllureJunit4</value>
+                            <value>ru.muradyan.ui.utils.MyAllureListener</value>
                         </property>
                     </properties>
                 </configuration>
                 <dependencies>
-                    <!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->
                     <dependency>
                         <groupId>org.aspectj</groupId>
                         <artifactId>aspectjweaver</artifactId>
@@ -182,11 +216,12 @@
                 <executions>
                     <execution>
                         <id>allure-plugin</id>
-                        <phase>install</phase>
+                        <phase>test</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
                     </execution>
+
                 </executions>
             </plugin>
 
