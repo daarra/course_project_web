@@ -8,10 +8,12 @@ import io.qameta.allure.Step;
 
 import java.util.List;
 import org.apache.log4j.Logger;
+import managers.PageManager;
 
 public class StartPage extends BasePage {
 
     private static final Logger logger = Logger.getLogger(StartPage.class);
+    private PageManager pageManager = PageManager.getInstance();
 
     @FindBy(xpath = "//h2[contains(text(), 'LambdaTest Sample App')]")
     private WebElement pageTitle;
@@ -36,7 +38,7 @@ public class StartPage extends BasePage {
         Assert.assertTrue("Заголовок 'LambdaTest Sample App' не найден",
                 pageTitle.isDisplayed() && pageTitle.getText().contains("LambdaTest Sample App"));
         logger.info("Нужный заголовок присутствует на странице сайта");
-        return pageManager.getStartPage();
+        return pageManager.getStartPage_task1();
     }
 
     @Step("Проверить, что присутствует текст '5 of 5 remaining'")
@@ -44,7 +46,7 @@ public class StartPage extends BasePage {
         Assert.assertTrue("Текст '5 of 5 remaining' не найден на странице",
                 remainingText.isDisplayed() && remainingText.getText().contains("5 of 5 remaining"));
         logger.info("Нужный текст присутствует на странице сайта");
-        return pageManager.getStartPage();
+        return pageManager.getStartPage_task1();
     }
 
     @Step("Добавить элемент в список")
@@ -52,7 +54,7 @@ public class StartPage extends BasePage {
         inputField.sendKeys(text);
         addButton.click();  // Добавлено нажатие кнопки добавления
         logger.info("Элемент добавлен в список");
-        return pageManager.getStartPage();
+        return pageManager.getStartPage_task1();
     }
 
     @Step("Проверить, что элемент списка зачеркнут")
@@ -81,6 +83,6 @@ public class StartPage extends BasePage {
             }
         }
         logger.info("Элемент зачеркнут");
-        return pageManager.getStartPage();
+        return pageManager.getStartPage_task1();
     }
 }

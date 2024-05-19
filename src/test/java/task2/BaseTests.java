@@ -1,4 +1,4 @@
-package task1;
+package task2;
 
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -22,7 +22,7 @@ public class BaseTests {
 
     @Before
     public void before(){
-        driverManager.getDriver().get("https://lambdatest.github.io/sample-todo-app/");
+        driverManager.getDriver().get("https://mospolytech.ru/ ");
     }
 
     @AfterClass
