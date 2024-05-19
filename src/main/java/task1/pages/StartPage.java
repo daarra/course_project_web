@@ -7,9 +7,11 @@ import org.junit.Assert;
 import io.qameta.allure.Step;
 
 import java.util.List;
-
+import org.apache.log4j.Logger;
 
 public class StartPage extends BasePage {
+
+    private static final Logger logger = Logger.getLogger(StartPage.class);
 
     @FindBy(xpath = "//h2[contains(text(), 'LambdaTest Sample App')]")
     private WebElement pageTitle;
@@ -29,58 +31,56 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//span[@class='ng-binding']")
     private WebElement countLi;
 
-
-    @Step ("Проверить, что присутствует заголовок")
+    @Step("Проверить, что присутствует заголовок")
     public StartPage isPageTitleDisplayed() {
         Assert.assertTrue("Заголовок 'LambdaTest Sample App' не найден",
                 pageTitle.isDisplayed() && pageTitle.getText().contains("LambdaTest Sample App"));
+        logger.info("Нужный заголовок присутствует на странице сайта");
         return pageManager.getStartPage();
     }
 
-    @Step ("Проверить, что присутствует текст '5 of 5 remaining'")
+    @Step("Проверить, что присутствует текст '5 of 5 remaining'")
     public StartPage isRemainingTextDisplayed() {
         Assert.assertTrue("Текст '5 of 5 remaining' не найден на странице",
                 remainingText.isDisplayed() && remainingText.getText().contains("5 of 5 remaining"));
+        logger.info("Нужный текст присутствует на странице сайта");
         return pageManager.getStartPage();
     }
 
-
-    @Step ("Проверить, что элемент добавлен")
+    @Step("Добавить элемент в список")
     public StartPage addItemToList(String text) {
         inputField.sendKeys(text);
+        addButton.click();  // Добавлено нажатие кнопки добавления
+        logger.info("Элемент добавлен в список");
         return pageManager.getStartPage();
     }
 
-    @Step
-    public StartPage clickButton() {
-        addButton.click();
-        return pageManager.getStartPage();
-    }
-
-    @Step ("Проверить, что элемент списка зачеркнут")
+    @Step("Проверить, что элемент списка зачеркнут")
     public StartPage checkTheListItemAndClick(String nameInput) {
-        int number = 0;
+        int initialCount = Integer.parseInt(countLi.getText().split("\\s+")[0]);
+
         for (WebElement menuItem : listItems) {
             String inputName = menuItem.findElement(By.tagName("input")).getAttribute("name");
             if (inputName.equalsIgnoreCase(nameInput)) {
-                String numberText = countLi.getText().split("\\s+")[0];
-                number = Integer.parseInt(numberText);
                 String spanClass = menuItem.findElement(By.tagName("span")).getAttribute("class");
                 Assert.assertTrue("Элемент списка " + nameInput + " зачеркнут", spanClass.contains("done-false"));
                 menuItem.findElement(By.xpath(".//input[@type='checkbox']")).click();
+                break;
             }
         }
+
+        int newCount = Integer.parseInt(countLi.getText().split("\\s+")[0]);
 
         for (WebElement menuItem : listItems) {
             String inputName = menuItem.findElement(By.tagName("input")).getAttribute("name");
             if (inputName.equalsIgnoreCase(nameInput)) {
                 String spanClass = menuItem.findElement(By.tagName("span")).getAttribute("class");
-                String numberText = countLi.getText().split("\\s+")[0];
-                Assert.assertTrue("На один не уменьшилось количество " + nameInput, number - 1 == Integer.parseInt(numberText));
+                Assert.assertEquals("Количество оставшихся элементов не уменьшилось на один", initialCount - 1, newCount);
                 Assert.assertTrue("Элемент списка " + nameInput + " не становится зачеркнутым", spanClass.contains("true"));
+                break;
             }
         }
+        logger.info("Элемент зачеркнут");
         return pageManager.getStartPage();
     }
-
 }
