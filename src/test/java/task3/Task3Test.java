@@ -12,7 +12,7 @@ public class Task3Test extends BaseTests {
         pageManager.getStartPage_task3().verifyHomePageUrl().clickOnCatalog().moveToCategory1("Все для гейминга").clickOnMenuItem("Коврики для мыши");
 
         try{
-            Thread.sleep(2000);
+            Thread.sleep(200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
