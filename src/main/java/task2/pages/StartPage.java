@@ -24,7 +24,7 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//a[@href='/obuchauschimsya/raspisaniya/' and @class='main-nav__item-link' and @title='Расписания']")
     private WebElement scheduleLink;
 
-    @Step(value = "Нажимаем на гамбургер (меню)")
+    @Step("Нажимаем на гамбургер (меню)")
     public StartPage menuHamburgerClick() {
         menuButtom.click();
         Assert.assertTrue("Меню не открылось", menu.isDisplayed());

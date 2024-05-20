@@ -26,12 +26,13 @@ public class SchedulePage extends BasePage {
         return pageManager.getStartSchedulePage();
     }
 
-    @Step("Кликаем на ссылку 'Смотреть на сайте''")
+    @Step("Кликаем на ссылку 'Смотреть на сайте'")
     public GroupSchedulePage scheduleLink() {
         scrollToElementJs(h1);
         waitUntilElementToBeVisible(h1).click();
+        moveToNewTab();
         logger.info("Кликнули на ссылку для просмотра расписания на сайте");
-        return pageManager.getStartGroupSchedulePage();
+        return pageManager.getStartGroupSchedulePage().checkOpenClassSchedulePage();
     }
 
 }

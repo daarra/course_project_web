@@ -8,7 +8,12 @@ public class Task2Test extends BaseTests {
     @Test
     @DisplayName("Тестирование страницы расписания на сайте Мосполитеха")
     public void test(){
-        pageManager.getStartPage_task2().menuHamburgerClick().hoverOnObuchauschimsyaLink().clickOnScheduleLink().pagecheckOpenInsurancePage().scheduleLink();
+        pageManager.getStartPage_task2()
+                .menuHamburgerClick()
+                .hoverOnObuchauschimsyaLink()
+                .clickOnScheduleLink()
+                .pagecheckOpenInsurancePage()
+                .scheduleLink().checkOpenClassSchedulePage().inputGroup("221-361");
 
         try{
             Thread.sleep(5000);

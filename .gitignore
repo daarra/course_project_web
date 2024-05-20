@@ -37,8 +37,16 @@ build/
 ### Mac OS ###
 .DS_Store
 
+# Folder ignoring
 target
 .idea
+.allure
+logs
 
+# File ignoring
+*.iml
+*.war
+*.jar
+*.log
 *.iml
 .DS_Store
