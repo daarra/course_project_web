@@ -15,6 +15,7 @@ public class PageManager {
     private task2.pages.GroupSchedulePage groupSchedulePage;
     private task3.pages.StartPage startPageTask3;
     private task3.pages.XboxPage xboxPage;
+    private task4.pages.StartPage startPageTask4;
 
     private PageManager(){
 
@@ -67,5 +68,12 @@ public class PageManager {
             xboxPage = new task3.pages.XboxPage();
         }
         return xboxPage;
+    }
+
+    public task4.pages.StartPage getStartPage_task4(){
+        if (startPageTask4 == null){
+            startPageTask4 = new task4.pages.StartPage();
+        }
+        return startPageTask4;
     }
 }
