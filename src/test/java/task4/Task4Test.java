@@ -8,7 +8,7 @@ public class Task4Test extends BaseTests {
     @Test
     @DisplayName("Тестирование сайта интернет-магазина 'Золотое яблоко'")
     public void test(){
-        pageManager.getStartPage_task4().verifyHomePageUrl();
+        pageManager.getStartPage_task4().verifyHomePageUrl().clickOnCategory();
 
         try{
             Thread.sleep(5000);

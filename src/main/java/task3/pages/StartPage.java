@@ -17,7 +17,6 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//meta[@property='og:url']")
     private WebElement url;
 
-
     @FindBy(xpath = "//div[@data-baobab-name='catalog']/button")
     private WebElement catalogButton;
 

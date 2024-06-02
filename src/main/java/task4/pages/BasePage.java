@@ -29,4 +29,9 @@ public class BasePage {
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driverManager.getDriver();
         javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
     }
+
+    protected WebElement waitUntilElementToBeClickable(WebElement element) {
+        return wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
 }

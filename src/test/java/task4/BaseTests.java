@@ -28,4 +28,6 @@ public class BaseTests {
     public static void after(){
         InitManager.quitFramework();
     }
+
+
 }
