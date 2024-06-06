@@ -7,25 +7,25 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import managers.DriverManager;
+import managers.EdgeDriverManager;
 import managers.PageManager;
 import java.util.List;
 
 import java.time.Duration;
 
 public class BasePage {
-    protected final DriverManager driverManager = DriverManager.getInstance();
+    protected final EdgeDriverManager edgeDriverManager = EdgeDriverManager.getInstance();
     protected PageManager pageManager = PageManager.getInstance();
-    protected WebDriverWait wait = new WebDriverWait(driverManager.getDriver(), Duration.ofSeconds(10), Duration.ofMillis(1000));
-    protected Actions action = new Actions(driverManager.getDriver());
+    protected WebDriverWait wait = new WebDriverWait(edgeDriverManager.getDriver(), Duration.ofSeconds(10), Duration.ofMillis(1000));
+    protected Actions action = new Actions(edgeDriverManager.getDriver());
 
 
     public BasePage() {
-        PageFactory.initElements(driverManager.getDriver(), this);
+        PageFactory.initElements(edgeDriverManager.getDriver(), this);
     }
 
     protected void scrollToElementJs(WebElement element) {
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driverManager.getDriver();
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) edgeDriverManager.getDriver();
         javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
@@ -54,7 +54,7 @@ public class BasePage {
 
 
     protected boolean isBeforeElementPresent(WebElement element) {
-        JavascriptExecutor js = (JavascriptExecutor) driverManager.getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) edgeDriverManager.getDriver();
         String script = "var element = arguments[0];" +
                 "var style = window.getComputedStyle(element, '::before');" +
                 "return style.getPropertyValue('content') !== '';";
@@ -62,8 +62,8 @@ public class BasePage {
     }
 
     protected void moveToNewTab() {
-        for (String tab : driverManager.getDriver().getWindowHandles()) {
-            driverManager.getDriver().switchTo().window(tab);
+        for (String tab : edgeDriverManager.getDriver().getWindowHandles()) {
+            edgeDriverManager.getDriver().switchTo().window(tab);
         }
     }
 

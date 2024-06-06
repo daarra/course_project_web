@@ -6,6 +6,7 @@ package managers;
 
 import task2.pages.GroupSchedulePage;
 import task2.pages.SchedulePage;
+import task4.pages.NewProductsPage;
 
 public class PageManager {
     private static PageManager INSTANCE = null;
@@ -16,6 +17,7 @@ public class PageManager {
     private task3.pages.StartPage startPageTask3;
     private task3.pages.XboxPage xboxPage;
     private task4.pages.StartPage startPageTask4;
+    private task4.pages.NewProductsPage newProductsPage;
 
     private PageManager(){
 
@@ -75,5 +77,12 @@ public class PageManager {
             startPageTask4 = new task4.pages.StartPage();
         }
         return startPageTask4;
+    }
+
+    public task4.pages.NewProductsPage getNewProductsPage(){
+        if (newProductsPage == null){
+            newProductsPage = new NewProductsPage();
+        }
+        return newProductsPage;
     }
 }

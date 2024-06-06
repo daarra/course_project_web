@@ -3,14 +3,13 @@ package task1;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
-import managers.DriverManager;
+import managers.EdgeDriverManager;
 import managers.InitManager;
 import managers.PageManager;
 import managers.TestPropManager;
-import utils.PropsConst;
 
 public class BaseTests {
-    private final DriverManager driverManager = DriverManager.getInstance();
+    private final EdgeDriverManager edgeDriverManager = EdgeDriverManager.getInstance();
     protected PageManager pageManager = PageManager.getInstance();
     private final TestPropManager propManager = TestPropManager.getInstance();
 
@@ -22,7 +21,7 @@ public class BaseTests {
 
     @Before
     public void before(){
-        driverManager.getDriver().get("https://lambdatest.github.io/sample-todo-app/");
+        edgeDriverManager.getDriver().get("https://lambdatest.github.io/sample-todo-app/");
     }
 
     @AfterClass

@@ -6,5 +6,17 @@ public class PropsConst {
 
     public static final String PATH_EGD_DRIVER_WINDOWS = "path.edg.driver.windows";
 
+    public static final String PATH_CHROME_DRIVER_WINDOWS = "path.chrome.driver.windows";
+
+    public static final String PATH_GECKO_DRIVER_WINDOWS = "path.gecko.driver.windows";
+
+    public static final String PATH_CHROME_DRIVER_MAC = "path.chrome.driver.mac";
+
+    public static final String PATH_GECKO_DRIVER_MAC = "path.gecko.driver.mac";
+
+    public static final String PATH_CHROME_DRIVER_UNIX = "path.chrome.driver.unix";
+
+    public static final String PATH_GECKO_DRIVER_UNIX = "path.gecko.driver.unix";
+
     public static final String PAGE_LOAD_TIMEOUT = "page.load.timeout";
 }

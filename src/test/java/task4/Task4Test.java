@@ -11,7 +11,7 @@ public class Task4Test extends BaseTests {
         pageManager.getStartPage_task4().verifyHomePageUrl().clickOnCategory();
 
         try{
-            Thread.sleep(5000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

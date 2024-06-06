@@ -6,18 +6,18 @@ import utils.PropsConst;
 
 import java.util.concurrent.TimeUnit;
 
-public class DriverManager {
+public class EdgeDriverManager {
 
-    private static DriverManager INSTANCE = null;
+    private static EdgeDriverManager INSTANCE = null;
     private WebDriver driver;
     private final TestPropManager propManager = TestPropManager.getInstance();
-    private DriverManager(){
+    private EdgeDriverManager(){
 
     }
 
-    public static DriverManager getInstance(){
+    public static EdgeDriverManager getInstance(){
         if (INSTANCE == null){
-            INSTANCE = new DriverManager();
+            INSTANCE = new EdgeDriverManager();
         }
         return INSTANCE;
     }
@@ -38,7 +38,7 @@ public class DriverManager {
     }
 
     private void initDriver() {
-        System.setProperty("webdriver.edge.driver", propManager.getProperty(PropsConst.PATH_EGD_DRIVER_WINDOWS));
+        System.setProperty("webdriver.сhrome.driver", propManager.getProperty(PropsConst.PATH_EGD_DRIVER_WINDOWS));
         driver = new EdgeDriver();
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();

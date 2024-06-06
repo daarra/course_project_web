@@ -1,6 +1,7 @@
 package task4.pages;
 
-import managers.DriverManager;
+import managers.ChromeDriverManager;
+import managers.EdgeDriverManager;
 import managers.PageManager;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -12,13 +13,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class BasePage {
-    protected final DriverManager driverManager = DriverManager.getInstance();
+    protected final ChromeDriverManager chromeDriverManager = ChromeDriverManager.getInstance();
     protected PageManager pageManager = PageManager.getInstance();
-    protected WebDriverWait wait = new WebDriverWait(driverManager.getDriver(), Duration.ofSeconds(10), Duration.ofMillis(500));
-    protected Actions action = new Actions(driverManager.getDriver());
+    protected WebDriverWait wait = new WebDriverWait(chromeDriverManager.getDriver(), Duration.ofSeconds(10), Duration.ofMillis(500));
+    protected Actions action = new Actions(chromeDriverManager.getDriver());
 
     public BasePage() {
-        PageFactory.initElements(driverManager.getDriver(), this);
+        PageFactory.initElements(chromeDriverManager.getDriver(), this);
     }
 
     protected WebElement waitUntilElementToBeVisible(WebElement element) {
@@ -26,7 +27,7 @@ public class BasePage {
     }
 
     protected void scrollToElementJs(WebElement element) {
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driverManager.getDriver();
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) chromeDriverManager.getDriver();
         javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 

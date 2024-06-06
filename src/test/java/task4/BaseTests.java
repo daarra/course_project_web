@@ -1,15 +1,12 @@
 package task4;
 
-import managers.DriverManager;
-import managers.InitManager;
-import managers.PageManager;
-import managers.TestPropManager;
+import managers.*;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
 public class BaseTests {
-    private final DriverManager driverManager = DriverManager.getInstance();
+    private final ChromeDriverManager edgeDriverManager = ChromeDriverManager.getInstance();
     protected PageManager pageManager = PageManager.getInstance();
     private final TestPropManager propManager = TestPropManager.getInstance();
 
@@ -21,7 +18,7 @@ public class BaseTests {
 
     @Before
     public void before(){
-        driverManager.getDriver().get("https://goldapple.ru/");
+        edgeDriverManager.getDriver().get("https://goldapple.ru/");
     }
 
     @AfterClass
