@@ -9,10 +9,8 @@ public class Task2Test extends BaseTests {
     @DisplayName("Тестирование страницы расписания на сайте Мосполитеха")
     public void test(){
         pageManager.getStartPage_task2()
-                .menuHamburgerClick()
-                .hoverOnObuchauschimsyaLink()
-                .clickOnScheduleLink()
-                .pagecheckOpenInsurancePage()
+                .checkOpenLink()
+                .switchToSchedulePage()
                 .scheduleLink().checkOpenClassSchedulePage().inputGroup("221-361");
 
         try{

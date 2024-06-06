@@ -1,28 +1,28 @@
 package task1.pages;
 
+import managers.ChromeDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import managers.EdgeDriverManager;
 import managers.PageManager;
 
 import java.time.Duration;
 
 public class BasePage {
-    protected final EdgeDriverManager edgeDriverManager = EdgeDriverManager.getInstance();
+    protected final ChromeDriverManager chromeDriverManager = ChromeDriverManager.getInstance();
     protected PageManager pageManager = PageManager.getInstance();
-    protected WebDriverWait wait = new WebDriverWait(edgeDriverManager.getDriver(), Duration.ofSeconds(10), Duration.ofMillis(1000));
+    protected WebDriverWait wait = new WebDriverWait(chromeDriverManager.getDriver(), Duration.ofSeconds(10), Duration.ofMillis(1000));
 
 
     public BasePage() {
-        PageFactory.initElements(edgeDriverManager.getDriver(), this);
+        PageFactory.initElements(chromeDriverManager.getDriver(), this);
     }
 
     protected void scrollToElementJs(WebElement element) {
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) edgeDriverManager.getDriver();
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) chromeDriverManager.getDriver();
         javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 

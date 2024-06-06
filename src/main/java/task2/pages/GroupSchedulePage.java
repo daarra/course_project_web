@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.junit.Assert;
 import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import task2.pages.BasePage;
 import java.util.List;
 
@@ -24,6 +25,9 @@ public class GroupSchedulePage extends BasePage {
 
     @FindBy(xpath = "//div[@class='found-groups row not-print']/div[@id='221-361']")
     private WebElement foundGroup;
+
+    @FindBy(xpath = "//div[contains(@class, 'schedule-day_today')]")
+    private WebElement todayElement;
 
     @Step("Проверка перехода на страницу расписание занятий")
     public GroupSchedulePage checkOpenClassSchedulePage() {
@@ -51,9 +55,28 @@ public class GroupSchedulePage extends BasePage {
                 foundGroup.isDisplayed() && foundGroup.getText().equals(groupNumber));
         Assert.assertEquals("В результатах поиска отображается больше одной группы", 1, listItems.size());
         logger.info("В результатах поиска только нужная группа");
+
+        // Нажимаем на найденную группу
+        foundGroup.click();
+        logger.info("Кликнули на группу: " + groupNumber);
+
+        // Определяем текущий день недели и выводим его
+        highlightCurrentDay();
+
         return pageManager.getStartGroupSchedulePage();
     }
 
+
+    @Step("Определяем текущий день недели и выделяем его в расписании")
+    private void highlightCurrentDay() {
+        waitUntilElementToBeVisible(todayElement);
+        if (todayElement != null) {
+            String currentDay = todayElement.findElement(By.xpath(".//div[contains(@class, 'title')]")).getText();
+            logger.info("Текущий день недели: " + currentDay);
+        } else {
+            logger.info("Сегодня воскресенье. Расписание отсутствует.");
+        }
+    }
 
 }
 

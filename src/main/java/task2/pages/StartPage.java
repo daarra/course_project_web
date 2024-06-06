@@ -24,6 +24,29 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//a[@href='/obuchauschimsya/raspisaniya/' and @class='main-nav__item-link' and @title='Расписания']")
     private WebElement scheduleLink;
 
+    @FindBy(xpath = "/html/body/main/h1")
+    private WebElement title;
+
+    @Step("Проверяем, что мы перешли по нужной ссылке")
+    public StartPage checkOpenLink(){
+        waitUntilElementToBeVisible(title);
+        String actualTitleText = title.getText();
+        String expectedTitleText = "Московский Политех";
+        Assert.assertTrue("Заголовок 'Московский Политех' не найден", title.isDisplayed() &&
+                actualTitleText.contains(expectedTitleText));
+        logger.info("Нужный заголовок присутствует на странице");
+        return pageManager.getStartPage_task2();
+    };
+
+    @Step("Переходим на страницу 'Расписание'")
+    public SchedulePage switchToSchedulePage() {
+        logger.info("Делаем переход на страницу с Расписанием");
+        pageManager.getStartPage_task2().menuHamburgerClick();
+        pageManager.getStartPage_task2().hoverOnObuchauschimsyaLink();
+        pageManager.getStartPage_task2().clickOnScheduleLink();
+        return pageManager.getStartSchedulePage().pagecheckOpenInsurancePage();
+    }
+
     @Step("Нажимаем на гамбургер (меню)")
     public StartPage menuHamburgerClick() {
         menuButtom.click();
@@ -43,7 +66,7 @@ public class StartPage extends BasePage {
     }
 
 
-    @Step("Нажимаем на ссылку 'Расписание'")
+    @Step("Нажимаем на кнопку 'Расписание'")
     public SchedulePage clickOnScheduleLink() {
         waitUntilElementToBeClickable(scheduleLink).click();
         logger.info("Нажали на ссылку 'Расписание'");

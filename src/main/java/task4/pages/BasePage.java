@@ -1,7 +1,6 @@
 package task4.pages;
 
 import managers.ChromeDriverManager;
-import managers.EdgeDriverManager;
 import managers.PageManager;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;

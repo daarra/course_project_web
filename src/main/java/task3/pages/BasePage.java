@@ -1,5 +1,6 @@
 package task3.pages;
 
+import managers.ChromeDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -7,25 +8,24 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import managers.EdgeDriverManager;
 import managers.PageManager;
 import java.util.List;
 
 import java.time.Duration;
 
 public class BasePage {
-    protected final EdgeDriverManager edgeDriverManager = EdgeDriverManager.getInstance();
+    protected final ChromeDriverManager chromeDriverManager = ChromeDriverManager.getInstance();
     protected PageManager pageManager = PageManager.getInstance();
-    protected WebDriverWait wait = new WebDriverWait(edgeDriverManager.getDriver(), Duration.ofSeconds(10), Duration.ofMillis(1000));
-    protected Actions action = new Actions(edgeDriverManager.getDriver());
+    protected WebDriverWait wait = new WebDriverWait(chromeDriverManager.getDriver(), Duration.ofSeconds(10), Duration.ofMillis(1000));
+    protected Actions action = new Actions(chromeDriverManager.getDriver());
 
 
     public BasePage() {
-        PageFactory.initElements(edgeDriverManager.getDriver(), this);
+        PageFactory.initElements(chromeDriverManager.getDriver(), this);
     }
 
     protected void scrollToElementJs(WebElement element) {
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) edgeDriverManager.getDriver();
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) chromeDriverManager.getDriver();
         javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
     }
 
@@ -54,7 +54,7 @@ public class BasePage {
 
 
     protected boolean isBeforeElementPresent(WebElement element) {
-        JavascriptExecutor js = (JavascriptExecutor) edgeDriverManager.getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) chromeDriverManager.getDriver();
         String script = "var element = arguments[0];" +
                 "var style = window.getComputedStyle(element, '::before');" +
                 "return style.getPropertyValue('content') !== '';";
@@ -62,8 +62,8 @@ public class BasePage {
     }
 
     protected void moveToNewTab() {
-        for (String tab : edgeDriverManager.getDriver().getWindowHandles()) {
-            edgeDriverManager.getDriver().switchTo().window(tab);
+        for (String tab : chromeDriverManager.getDriver().getWindowHandles()) {
+            chromeDriverManager.getDriver().switchTo().window(tab);
         }
     }
 
