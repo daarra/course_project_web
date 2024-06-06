@@ -23,11 +23,11 @@ public class GroupSchedulePage extends BasePage {
     @FindBy(xpath = "/html/body/div/div[1]/div[1]/div[3]/input[1]")
     private WebElement input;
 
-    @FindBy(xpath = "//div[@class='found-groups row not-print']/div[@id='221-361']")
-    private WebElement foundGroup;
-
     @FindBy(xpath = "//div[contains(@class, 'schedule-day_today')]")
     private WebElement todayElement;
+
+    @FindBy(xpath = "//div[contains(@class, 'schedule-day_today')]/div[contains(@class, 'title')]")
+    private WebElement dayToday;
 
     @Step("Проверка перехода на страницу расписание занятий")
     public GroupSchedulePage checkOpenClassSchedulePage() {
@@ -51,6 +51,10 @@ public class GroupSchedulePage extends BasePage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
+        // Динамически находим нужную группу по id
+        WebElement foundGroup = findGroupById(groupNumber);
+
         Assert.assertTrue("В результатах поиска не отображается нужная группа",
                 foundGroup.isDisplayed() && foundGroup.getText().equals(groupNumber));
         Assert.assertEquals("В результатах поиска отображается больше одной группы", 1, listItems.size());
@@ -66,17 +70,23 @@ public class GroupSchedulePage extends BasePage {
         return pageManager.getStartGroupSchedulePage();
     }
 
-
     @Step("Определяем текущий день недели и выделяем его в расписании")
     private void highlightCurrentDay() {
-        waitUntilElementToBeVisible(todayElement);
-        if (todayElement != null) {
-            String currentDay = todayElement.findElement(By.xpath(".//div[contains(@class, 'title')]")).getText();
+        waitUntilElementToBeVisible(dayToday);
+        if (dayToday.isDisplayed()) {
+            String currentDay = dayToday.getText();
             logger.info("Текущий день недели: " + currentDay);
         } else {
             logger.info("Сегодня воскресенье. Расписание отсутствует.");
         }
     }
 
+    private WebElement findGroupById(String groupId) {
+        for (WebElement element : listItems) {
+            if (element.getAttribute("id").equals(groupId)) {
+                return element;
+            }
+        }
+        throw new RuntimeException("Группа с id " + groupId + " не найдена");
+    }
 }
-
