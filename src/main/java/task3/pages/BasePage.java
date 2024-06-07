@@ -33,13 +33,12 @@ public class BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    protected void moveToElement(WebElement element) {
-        scrollToElementJs(element);
-    }
+
 
     protected WebElement waitUntilElementToBeVisible(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
 
     protected void waitUntilElementsToBeVisible(List<WebElement> elements) {
         for (WebElement element : elements) {
@@ -48,8 +47,17 @@ public class BasePage {
     }
 
 
+    protected void moveToElement(WebElement element) {
+        Actions actions = new Actions(chromeDriverManager.getDriver());
+        actions.moveToElement(element).perform();
+    }
+
     protected WebElement waitUntilElementToBeVisible(WebElement element) {
         return wait.until(ExpectedConditions.visibilityOf(element));
+    }
+
+    protected void waitUntilAttributeToBe(WebElement element, String attribute, String value) {
+        wait.until(ExpectedConditions.attributeToBe(element, attribute, value));
     }
 
 
@@ -67,4 +75,10 @@ public class BasePage {
         }
     }
 
+    // Новый метод для наведения и проверки атрибута
+    protected void moveToElementAndCheckAttribute(WebElement element, String attribute, String value) {
+        moveToElement(element);
+        waitUntilAttributeToBe(element, attribute, value);
+    }
 }
+

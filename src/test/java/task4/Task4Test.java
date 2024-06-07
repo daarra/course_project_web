@@ -7,7 +7,7 @@ public class Task4Test extends BaseTests {
 
     @Test
     @DisplayName("Тестирование сайта интернет-магазина 'Золотое яблоко'")
-    public void test(){
+    public void test1(){
         pageManager.getStartPage_task4().verifyHomePageUrl().clickOnCategory();
 
         try{

@@ -8,7 +8,9 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.List;
 
 public class StartPage extends BasePage {
@@ -21,27 +23,29 @@ public class StartPage extends BasePage {
 
     @FindBy(xpath = "//*[@id=\"__layout\"]/div/main/section[3]/div/div/div[2]/div/section/header/div[1]/div/a/h2")
     private WebElement newCategory;
-
-    @Step("Проверяем, что открыта главная страница по URL")
+    @Step("Проверяем, что открыта главная страница")
     public StartPage verifyHomePageUrl() {
-        // Wait for the page to load completely
-        wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+        WebDriverWait wait = new WebDriverWait(chromeDriverManager.getDriver(), Duration.ofSeconds(30));
 
-        // Wait until the URL is as expected
-        wait.until(ExpectedConditions.urlToBe(EXPECTED_URL));
+        // Ожидание загрузки заголовка страницы
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
 
-        // Get the actual URL of the current page
+        // Ожидание загрузки элементов меню (если есть)
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".menu")));
+
+        // Ожидание загрузки футера
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("footer")));
+
+        // Дополнительные ожидания для других элементов страницы
+
+        // После того как все элементы загрузились, проверяем URL
+        waitUntilUrlToBe(EXPECTED_URL);
         String actualUrl = chromeDriverManager.getDriver().getCurrentUrl();
-
-        // Assert that the actual URL matches the expected URL
         Assert.assertEquals("Текущий URL не совпадает с ожидаемым", EXPECTED_URL, actualUrl);
-
-        // Log that the homepage is opened
         logger.info("Открыли главную страницу сайта");
-
-        // Return the StartPage instance
         return pageManager.getStartPage_task4();
     }
+
 
 
     @Step("Нажать на каталог")
@@ -49,32 +53,12 @@ public class StartPage extends BasePage {
         waitUntilElementToBeClickable(newCategory).click();
         logger.info("Кликнули на каталог Новинок");
         try{
-            Thread.sleep(5000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
         return pageManager.getStartPage_task4();
     }
 
-    @Step("Проверяем, что открыта страница с новинками по URL")
-    public NewProductsPage verifyNewPageUrl() {
-        // Wait for the page to load completely
-        wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
-
-        // Wait until the URL is as expected
-        wait.until(ExpectedConditions.urlToBe(EXPECTED_URL2));
-
-        // Get the actual URL of the current page
-        String actualUrl = chromeDriverManager.getDriver().getCurrentUrl();
-
-        // Assert that the actual URL matches the expected URL
-        Assert.assertEquals("Текущий URL не совпадает с ожидаемым", EXPECTED_URL2, actualUrl);
-
-        // Log that the homepage is opened
-        logger.info("Открыли страницу с новинками сайта");
-
-        // Return the StartPage instance
-        return pageManager.getNewProductsPage();
-    }
 
 }

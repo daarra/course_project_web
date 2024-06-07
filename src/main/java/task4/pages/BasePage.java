@@ -2,6 +2,7 @@ package task4.pages;
 
 import managers.ChromeDriverManager;
 import managers.PageManager;
+import org.junit.Assert;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -32,6 +33,24 @@ public class BasePage {
 
     protected WebElement waitUntilElementToBeClickable(WebElement element) {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
+    }
+
+    protected void waitUntilPageLoadComplete() {
+        wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+    }
+
+    protected void waitUntilUrlToBe(String expectedUrl) {
+        WebDriverWait wait = new WebDriverWait(chromeDriverManager.getDriver(), Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.urlToBe(expectedUrl));
+    }
+
+    private void waitUntilUrlIsExpected(String expectedUrl) {
+        wait.until(ExpectedConditions.urlToBe(expectedUrl));
+    }
+
+    private void assertUrlIsExpected(String expectedUrl) {
+        String actualUrl = chromeDriverManager.getDriver().getCurrentUrl();
+        Assert.assertEquals("Текущий URL не совпадает с ожидаемым", expectedUrl, actualUrl);
     }
 
 }

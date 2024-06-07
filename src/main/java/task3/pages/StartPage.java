@@ -20,7 +20,7 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//div[@data-baobab-name='catalog']/button")
     private WebElement catalogButton;
 
-    @FindBy(xpath = "//li[@data-zone-name='category-link']/a")
+    @FindBy(xpath = "//li[@data-zone-name='category-link']")
     private List<WebElement> categoryList;
 
     @FindBy(xpath = "//ul[@data-autotest-id]//li//a")
@@ -31,7 +31,7 @@ public class StartPage extends BasePage {
     @Step("Проверяем, что открыта главная страница")
     public StartPage verifyHomePageUrl() {
         try{
-            Thread.sleep(5000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -47,7 +47,7 @@ public class StartPage extends BasePage {
         waitUntilElementToBeClickable(catalogButton).click();
         logger.info("Кликнули на каталог");
         try{
-            Thread.sleep(5000);
+            Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -56,38 +56,80 @@ public class StartPage extends BasePage {
 
 
     @Step("Навести на категорию '{category}'")
-    public StartPage moveToCategory1(String category) {
-        boolean categoryFound = false;
+    public StartPage moveToCategory(String category) {
+        try {
+            Thread.sleep(1000); // Ждем перед наведением, если это необходимо
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         for (WebElement element : categoryList) {
             waitUntilElementToBeVisible(element);
-            moveToElement(element);
-            try {
-                WebElement spanElement = element.findElement(By.xpath("./span"));
-                String spanText = spanElement.getText().trim();
-                if (spanText.equalsIgnoreCase(category)) {
-                    logger.info("Навели на категорию '" + category + "'");
-                    categoryFound = true;
-                    return pageManager.getStartPage_task3();
+            WebElement linkElement = element.findElement(By.xpath("./a"));
+            WebElement spanElement = linkElement.findElement(By.xpath("./span"));
+            String elementText = spanElement.getText();
+            logger.info("Проверяем элемент с текстом: " + elementText);
+
+            if (elementText.equals(category)) {
+                // Логирование перед наведением
+                String ariaSelectedValueBefore = element.getAttribute("aria-selected");
+                logger.info("До наведения, aria-selected='" + ariaSelectedValueBefore + "' для категории '" + category + "'");
+
+                // Наведение на ссылку <a> внутри <li>
+                moveToElement(linkElement);
+
+                // Явное ожидание после наведения
+                waitUntilElementToBeVisible(spanElement);
+
+                // Дополнительное ожидание для проверки
+                try {
+                    Thread.sleep(2000); // Дополнительное ожидание
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
-            } catch (Exception e) {
-                logger.warn("Не удалось найти элемент span внутри категории: " + e.getMessage());
-                return pageManager.getStartPage_task3();
+
+                // Логирование после наведения
+                String ariaSelectedValueAfter = element.getAttribute("aria-selected");
+                logger.info("После наведения, aria-selected='" + ariaSelectedValueAfter + "' для категории '" + category + "'");
+
+                // Проверяем, что aria-selected="true"
+                logger.info("Навели на категорию '" + category + "', проверяем aria-selected...");
+                try {
+                    waitUntilAttributeToBe(element, "aria-selected", "true");
+                } catch (Exception e) {
+                    logger.error("Не удалось дождаться изменения aria-selected на 'true' для категории '" + category + "'.");
+                    Assert.fail("Не удалось дождаться изменения aria-selected на 'true' для категории '" + category + "'.");
+                }
+
+                ariaSelectedValueAfter = element.getAttribute("aria-selected");
+                if ("true".equals(ariaSelectedValueAfter)) {
+                    logger.info("Элемент с категорией '" + category + "' успешно выбран (aria-selected=true)");
+                    return this;
+                } else {
+                    Assert.fail("Элемент найден, но aria-selected не установлен в 'true' для категории '" + category + "'. Текущее значение: " + ariaSelectedValueAfter);
+                }
             }
         }
-
-        if (!categoryFound) {
-            Assert.fail("Нет категории '" + category + "'");
-            return pageManager.getStartPage_task3();
-        }
-        return pageManager.getStartPage_task3();
+        Assert.fail("Нет категории '" + category + "'");
+        return this;
     }
+
+
 
     @Step("Нажать на пункт меню '{menuItem}'")
     public XboxPage clickOnMenuItem(String menuItem) {
+        System.out.println(menuItemList.size());
         for (WebElement item: menuItemList) {
+            System.out.println(menuItemList.size());
+            System.out.println(item.getText());
             if (waitUntilElementToBeVisible(item).getText().equals(menuItem)){
+                try{
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 moveToElement(item);
                 item.click();
+
                 logger.info("Переход на страницу с ноутбуками");
                 return pageManager.getxboxPage();
             }

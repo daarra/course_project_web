@@ -9,7 +9,7 @@ public class Task3Test extends BaseTests {
     @Test
     @DisplayName("Тестирование страницы расписания на сайте Мосполитеха")
     public void test(){
-        pageManager.getStartPage_task3().verifyHomePageUrl().clickOnCatalog().moveToCategory1("Все для гейминга").clickOnMenuItem("Коврики для мыши");
+        pageManager.getStartPage_task3().verifyHomePageUrl().clickOnCatalog().moveToCategory("Все для гейминга").clickOnMenuItem("Игровые приставки");
 
         try{
             Thread.sleep(200);
