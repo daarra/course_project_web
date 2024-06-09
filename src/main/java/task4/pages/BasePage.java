@@ -22,9 +22,6 @@ public class BasePage {
         PageFactory.initElements(chromeDriverManager.getDriver(), this);
     }
 
-    protected WebElement waitUntilElementToBeVisible(WebElement element) {
-        return wait.until(ExpectedConditions.visibilityOf(element));
-    }
 
     protected void scrollToElementJs(WebElement element) {
         JavascriptExecutor javascriptExecutor = (JavascriptExecutor) chromeDriverManager.getDriver();
@@ -37,6 +34,10 @@ public class BasePage {
 
     protected void waitUntilPageLoadComplete() {
         wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
+    }
+
+    protected WebElement waitUntilElementToBeVisible(WebElement element) {
+        return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
     protected void waitUntilUrlToBe(String expectedUrl) {

@@ -7,6 +7,7 @@ package managers;
 import task2.pages.GroupSchedulePage;
 import task2.pages.SchedulePage;
 import task4.pages.NewProductsPage;
+import task4.pages.PromotionsPage;
 
 public class PageManager {
     private static PageManager INSTANCE = null;
@@ -16,8 +17,10 @@ public class PageManager {
     private task2.pages.GroupSchedulePage groupSchedulePage;
     private task3.pages.StartPage startPageTask3;
     private task3.pages.XboxPage xboxPage;
+    private task3.pages.FavoritePage favoritePage;
     private task4.pages.StartPage startPageTask4;
     private task4.pages.NewProductsPage newProductsPage;
+    private task4.pages.PromotionsPage promotionsPage;
 
     private PageManager(){
 
@@ -72,6 +75,13 @@ public class PageManager {
         return xboxPage;
     }
 
+    public task3.pages.FavoritePage getfavoritePage(){
+        if (favoritePage == null){
+            favoritePage = new task3.pages.FavoritePage();
+        }
+        return favoritePage;
+    }
+
     public task4.pages.StartPage getStartPage_task4(){
         if (startPageTask4 == null){
             startPageTask4 = new task4.pages.StartPage();
@@ -85,4 +95,13 @@ public class PageManager {
         }
         return newProductsPage;
     }
+
+    public task4.pages.PromotionsPage getpromotionsPage(){
+        if ( promotionsPage == null){
+            promotionsPage = new PromotionsPage();
+        }
+        return  promotionsPage;
+    }
+
+
 }

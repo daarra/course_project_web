@@ -23,27 +23,23 @@ public class StartPage extends BasePage {
 
     @FindBy(xpath = "//*[@id=\"__layout\"]/div/main/section[3]/div/div/div[2]/div/section/header/div[1]/div/a/h2")
     private WebElement newCategory;
+
+    @FindBy(xpath = "//*[@id=\"__layout\"]/div/main/h1")
+    private WebElement pageTitle;
+
     @Step("Проверяем, что открыта главная страница")
     public StartPage verifyHomePageUrl() {
-        WebDriverWait wait = new WebDriverWait(chromeDriverManager.getDriver(), Duration.ofSeconds(30));
-
         // Ожидание загрузки заголовка страницы
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.tagName("h1")));
+        waitUntilElementToBeVisible(pageTitle);
 
-        // Ожидание загрузки элементов меню (если есть)
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".menu")));
+        // Проверка заголовка страницы
+        Assert.assertEquals("Заголовок страницы не соответствует ожидаемому", "Золотое яблоко", pageTitle.getText());
 
-        // Ожидание загрузки футера
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("footer")));
+        // Ожидание полной загрузки страницы (проверка всех ресурсов)
+        waitUntilPageLoadComplete();
 
-        // Дополнительные ожидания для других элементов страницы
-
-        // После того как все элементы загрузились, проверяем URL
-        waitUntilUrlToBe(EXPECTED_URL);
-        String actualUrl = chromeDriverManager.getDriver().getCurrentUrl();
-        Assert.assertEquals("Текущий URL не совпадает с ожидаемым", EXPECTED_URL, actualUrl);
         logger.info("Открыли главную страницу сайта");
-        return pageManager.getStartPage_task4();
+        return this;
     }
 
 

@@ -26,6 +26,9 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//ul[@data-autotest-id]//li//a")
     private List<WebElement> menuItemList;
 
+    @FindBy(xpath = "//div[@data-baobab-name='linkSnippet']")
+    private List<WebElement> xboxItemList;
+
     private static final String EXPECTED_URL = "https://market.yandex.ru/";
 
     @Step("Проверяем, что открыта главная страница")
@@ -116,24 +119,30 @@ public class StartPage extends BasePage {
 
 
     @Step("Нажать на пункт меню '{menuItem}'")
-    public XboxPage clickOnMenuItem(String menuItem) {
-        System.out.println(menuItemList.size());
-        for (WebElement item: menuItemList) {
-            System.out.println(menuItemList.size());
-            System.out.println(item.getText());
-            if (waitUntilElementToBeVisible(item).getText().equals(menuItem)){
-                try{
-                    Thread.sleep(1000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                moveToElement(item);
-                item.click();
+    public XboxPage clickOnMenuItem(String category, String section, String menuItem) {
+        moveToCategory(category);
+        boolean sectionFound = false;
 
-                logger.info("Переход на страницу с ноутбуками");
-                return pageManager.getxboxPage();
+        for (WebElement item : xboxItemList) {
+            if (sectionFound) {
+                // После нахождения нужного секции, ищем menuItem
+                if (waitUntilElementToBeVisible(item).getText().equals(menuItem)) {
+                    try {
+                        Thread.sleep(1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+//                    moveToElement(item);
+//                    item.click();
+
+                    logger.info("Переход на страницу с меню: " + menuItem);
+                    return pageManager.getxboxPage().verifyTitle();
+                }
+            } else if (waitUntilElementToBeVisible(item).getText().equals(section)) {
+                sectionFound = true;
             }
         }
+
         Assert.fail("Не найден пункт меню " + menuItem);
         return pageManager.getxboxPage();
     }

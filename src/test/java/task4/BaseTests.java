@@ -18,7 +18,7 @@ public class BaseTests {
 
     @Before
     public void before(){
-        edgeDriverManager.getDriver().get("https://goldapple.ru/");
+        edgeDriverManager.getDriver().get("https://goldapple.ru/promo");
     }
 
     @AfterClass

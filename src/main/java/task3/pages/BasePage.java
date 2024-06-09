@@ -19,6 +19,9 @@ public class BasePage {
     protected WebDriverWait wait = new WebDriverWait(chromeDriverManager.getDriver(), Duration.ofSeconds(10), Duration.ofMillis(1000));
     protected Actions action = new Actions(chromeDriverManager.getDriver());
 
+    protected static WebElement firstProduct;
+    protected static String firstTitle;
+    protected static String firstPrice;
 
     public BasePage() {
         PageFactory.initElements(chromeDriverManager.getDriver(), this);
@@ -74,6 +77,7 @@ public class BasePage {
             chromeDriverManager.getDriver().switchTo().window(tab);
         }
     }
+
 
     // Новый метод для наведения и проверки атрибута
     protected void moveToElementAndCheckAttribute(WebElement element, String attribute, String value) {

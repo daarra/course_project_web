@@ -7,16 +7,29 @@ public class Task4Test extends BaseTests {
 
     @Test
     @DisplayName("Тестирование сайта интернет-магазина 'Золотое яблоко'")
-    public void test1(){
+    public void test1() {
         pageManager.getStartPage_task4().verifyHomePageUrl().clickOnCategory();
 
-        try{
+        try {
             Thread.sleep(10000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 
-}
+
+        public void test2() {
+            pageManager.getpromotionsPage().isPageTitleCorrect();
+
+            try {
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+
+
 
