@@ -82,10 +82,8 @@ public class StartPage extends BasePage {
 
                 // Явное ожидание после наведения
                 waitUntilElementToBeVisible(spanElement);
-
-                // Дополнительное ожидание для проверки
                 try {
-                    Thread.sleep(2000); // Дополнительное ожидание
+                    Thread.sleep(2000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -125,7 +123,7 @@ public class StartPage extends BasePage {
 
         for (WebElement item : xboxItemList) {
             if (sectionFound) {
-                // После нахождения нужного секции, ищем menuItem
+                // После нахождения нужной секции, ищем menuItem
                 if (waitUntilElementToBeVisible(item).getText().equals(menuItem)) {
                     try {
                         Thread.sleep(1000);

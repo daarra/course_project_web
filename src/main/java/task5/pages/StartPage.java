@@ -40,7 +40,7 @@ public class StartPage extends BasePage {
         return this;
     }
 
-    @Step("Нажать на кнопку {nameButton} и проверить ответ с ответом api")
+    @Step("Нажать на кнопку и сверить ответ с api")
     public StartPage clickOnButtonAndCheckAPI(String nameButton, String httpMethod) {
         for (WebElement button: buttonList) {
             WebElement request = button.findElement(By.xpath("./a"));

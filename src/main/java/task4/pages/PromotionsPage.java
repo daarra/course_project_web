@@ -48,14 +48,14 @@ public class PromotionsPage extends BasePage {
             WebElement cityOption = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//div[@class='ga-select-list__option']/span[text()='" + cityName + "']")));
             cityOption.click();
 
-            logger.info("Successfully selected the city: " + cityName);
+            logger.info("Успешно выбрали город: " + cityName);
         } catch (Exception e) {
-            logger.error("Failed to select the city: " + cityName, e);
+            logger.error("Возникла ошибка при выборе города: " + cityName, e);
         }
         return this;
     }
 
-    @Step("Log the first 5 promotions")
+    @Step("Перейти по ссылке на первую акцию")
     public FirstPromoPage goToFirstPromotion() {
         waitUntilElementToBeClickable(firstPromo).click();
         logger.info("Кликнули на первую акцию");

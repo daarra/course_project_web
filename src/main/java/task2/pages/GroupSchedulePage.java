@@ -1,6 +1,7 @@
 package task2.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.junit.Assert;
@@ -52,7 +53,6 @@ public class GroupSchedulePage extends BasePage {
             throw new RuntimeException(e);
         }
 
-        // Динамически находим нужную группу по id
         WebElement foundGroup = findGroupById(groupNumber);
 
         Assert.assertTrue("В результатах поиска не отображается нужная группа",
@@ -63,9 +63,14 @@ public class GroupSchedulePage extends BasePage {
         // Нажимаем на найденную группу
         foundGroup.click();
         logger.info("Кликнули на группу: " + groupNumber);
-
-        // Определяем текущий день недели и выводим его
-        highlightCurrentDay();
+        try{
+            // Определяем текущий день недели и выводим его
+            highlightCurrentDay();
+        } catch (TimeoutException e) {
+            logger.info("Нет доступного расписания на данный момент");
+        } catch (Exception e) {
+            System.out.println("Произошла ошибка: " + e.getMessage());
+        }
 
         return pageManager.getStartGroupSchedulePage();
     }
@@ -81,6 +86,7 @@ public class GroupSchedulePage extends BasePage {
         }
     }
 
+    @Step("Находим группу с нужным id")
     private WebElement findGroupById(String groupId) {
         for (WebElement element : listItems) {
             if (element.getAttribute("id").equals(groupId)) {

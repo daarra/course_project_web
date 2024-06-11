@@ -40,7 +40,7 @@ public class FavoritePage extends BasePage{
         return pageManager.getfavoritePage();
     }
 
-    @Step("Проверяем, что на странице нужный нам товар ")
+    @Step("Проверяем, что на странице нужный нам товар, который мы сохраняли на страницы с выбором приставок")
     public FavoritePage verifyProducts() {
         logger.info("Проверка");
         try{
@@ -84,6 +84,7 @@ public class FavoritePage extends BasePage{
         return this;
     }
 
+    @Step("Обновить страницу")
     public FavoritePage updatePage(){
         moveToElement(favoruteButton);
         favoruteButton.click();

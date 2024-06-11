@@ -33,20 +33,9 @@ public class BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-    protected void moveToElement(WebElement element) {
-        scrollToElementJs(element);
-    }
-
     protected WebElement waitUntilElementToBeVisible(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-
-    protected void waitUntilElementsToBeVisible(List<WebElement> elements) {
-        for (WebElement element : elements) {
-            wait.until(ExpectedConditions.visibilityOf(element));
-        }
-    }
-
 
     protected WebElement waitUntilElementToBeVisible(WebElement element) {
         return wait.until(ExpectedConditions.visibilityOf(element));

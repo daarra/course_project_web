@@ -36,19 +36,9 @@ public class BasePage {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
 
-
-
     protected WebElement waitUntilElementToBeVisible(By locator) {
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
-
-
-    protected void waitUntilElementsToBeVisible(List<WebElement> elements) {
-        for (WebElement element : elements) {
-            wait.until(ExpectedConditions.visibilityOf(element));
-        }
-    }
-
 
     protected void moveToElement(WebElement element) {
         Actions actions = new Actions(chromeDriverManager.getDriver());
@@ -64,25 +54,5 @@ public class BasePage {
     }
 
 
-    protected boolean isBeforeElementPresent(WebElement element) {
-        JavascriptExecutor js = (JavascriptExecutor) chromeDriverManager.getDriver();
-        String script = "var element = arguments[0];" +
-                "var style = window.getComputedStyle(element, '::before');" +
-                "return style.getPropertyValue('content') !== '';";
-        return (Boolean) js.executeScript(script, element);
-    }
-
-    protected void moveToNewTab() {
-        for (String tab : chromeDriverManager.getDriver().getWindowHandles()) {
-            chromeDriverManager.getDriver().switchTo().window(tab);
-        }
-    }
-
-
-    // Новый метод для наведения и проверки атрибута
-    protected void moveToElementAndCheckAttribute(WebElement element, String attribute, String value) {
-        moveToElement(element);
-        waitUntilAttributeToBe(element, attribute, value);
-    }
 }
 

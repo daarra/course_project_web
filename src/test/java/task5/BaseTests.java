@@ -22,6 +22,11 @@ public class BaseTests {
     @Before
     public void before(){
         chromeDriverManager.getDriver().get("https://reqres.in/");
+        try {
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        };
     }
 
     @AfterClass

@@ -11,7 +11,8 @@ public class Task2Test extends BaseTests {
         pageManager.getStartPage_task2()
                 .checkOpenLink()
                 .switchToSchedulePage()
-                .scheduleLink().checkOpenClassSchedulePage().inputGroup("221-361");
+                .scheduleLink().checkOpenClassSchedulePage()
+                .inputGroup("221-361");
 
         try{
             Thread.sleep(5000);

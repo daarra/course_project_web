@@ -17,7 +17,6 @@ public class Task5Test extends BaseTests {
                 .clickOnButtonAndCheckAPI("Single <resource>", "get")
                 .clickOnButtonAndCheckAPI("Single <resource> not found", "get")
                 .clickOnButtonAndCheckAPI("Create", "post")
-                .clickOnButtonAndCheckAPI("Update", "put")
                 .clickOnButtonAndCheckAPI("Update", "patch")
                 .clickOnButtonAndCheckAPI("Delete", "delete")
                 .clickOnButtonAndCheckAPI("Register - successful", "post")

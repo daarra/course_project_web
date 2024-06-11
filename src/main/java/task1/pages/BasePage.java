@@ -21,15 +21,6 @@ public class BasePage {
         PageFactory.initElements(chromeDriverManager.getDriver(), this);
     }
 
-    protected void scrollToElementJs(WebElement element) {
-        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) chromeDriverManager.getDriver();
-        javascriptExecutor.executeScript("arguments[0].scrollIntoView(true);", element);
-    }
-
-    protected WebElement waitUntilElementToBeClickable(WebElement element) {
-        return wait.until(ExpectedConditions.elementToBeClickable(element));
-    }
-
     protected void waitUntilElementToBeVisible(By locator) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }

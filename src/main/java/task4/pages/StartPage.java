@@ -17,14 +17,10 @@ public class StartPage extends BasePage {
 
     private static final Logger logger = Logger.getLogger(StartPage.class);
 
-    private static final String EXPECTED_URL = "https://goldapple.ru/";
-
-    private static final String EXPECTED_URL2 = "https://goldapple.ru";
-
     @FindBy(xpath = "//*[@id=\"__layout\"]/div/main/section[3]/div/div/div[2]/div/section/header/div[1]/div/a/h2")
     private WebElement newCategory;
 
-    @FindBy(xpath = "//div[@class='ga-home-base-stories-circles-slider__wrapper R-96s O70YU']")
+    @FindBy(xpath = "//div[@class='ga-home-base-stories-circles-slider__wrapper v9Ktf QGzi0']")
     private WebElement slider;
 
     @FindBy(xpath = "//*[@id='__layout']/div/header/div[3]/div/nav/ul/li[4]/a")
@@ -41,17 +37,12 @@ public class StartPage extends BasePage {
     public StartPage verifyHomePageUrl() {
         moveToElement(slider);
         boolean flag = slider.isDisplayed();
-        System.out.println(flag);
         Assert.assertTrue("Slider element is not present on the page", flag);
-
-        // Ожидание полной загрузки страницы (проверка всех ресурсов)
-
         logger.info("Открыли главную страницу сайта");
         return this;
     }
 
-
-    @Step("Нажать на каталог")
+    @Step("Нажать на каталог новинок")
     public NewProductsPage clickOnCategory() {
         waitUntilElementToBeClickable(newCategory).click();
         logger.info("Кликнули на каталог Новинок");
@@ -63,7 +54,7 @@ public class StartPage extends BasePage {
         return pageManager.getNewProductsPage();
     }
 
-    @Step("Нажать на каталог")
+    @Step("Нажать на каталог акций")
     public PromotionsPage clickOnPromo() {
         scrollToElementJs(promo);
         waitUntilElementToBeClickable(promo).click();
@@ -76,11 +67,11 @@ public class StartPage extends BasePage {
         return pageManager.getpromotionsPage();
     }
 
-    @Step("Нажать на каталог")
+    @Step("Нажать на кнопку потверждения локации")
     public StartPage clickOnButtonLocation() {
         scrollToElementJs(button);
         waitUntilElementToBeClickable(button).click();
-        logger.info("Кликнули на каталог Брендов");
+        logger.info("Кнопка для всплывающего окна с локацией успешно нажата");
         try{
             Thread.sleep(10000);
         } catch (InterruptedException e) {
@@ -89,8 +80,8 @@ public class StartPage extends BasePage {
         return pageManager.getStartPage_task4();
     }
 
-    @Step("Нажать на каталог")
-    public BrandsPage clickOnBrends() {
+    @Step("Нажать на каталог брендов")
+    public BrandsPage clickOnBrands() {
         scrollToElementJs(brands);
         waitUntilElementToBeClickable(brands).click();
         logger.info("Кликнули на каталог Брендов");

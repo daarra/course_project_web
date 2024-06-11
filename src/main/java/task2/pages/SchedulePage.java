@@ -10,7 +10,7 @@ import java.util.List;
 
 public class SchedulePage extends BasePage {
 
-    private static final Logger logger = Logger.getLogger(task1.pages.StartPage.class);
+    private static final Logger logger = Logger.getLogger(task2.pages.StartPage.class);
 
     @FindBy(xpath = "//*[@id=\"bx_2015423015_2810\"]/div[2]/div/h1")
     private WebElement title;

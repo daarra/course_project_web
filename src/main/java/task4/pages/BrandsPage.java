@@ -22,47 +22,41 @@ public class BrandsPage extends BasePage {
     @FindBy(xpath = "//button[contains(@class, 'Glpeq')]")
     private WebElement searchButton;
 
-    @FindBy(xpath = "//li[@class='_0SdbU']")
-    private List<WebElement> searchResults;
+    @FindBy(xpath = "//*[@id=\"__layout\"]/div/main/div[2]/div/div[2]/div/div/div/div/div[55]/div/ul/li/button")
+    private WebElement clarins;
+
+    @FindBy(xpath = "//div[@class='KwHbB']")
+    private WebElement notification;
 
     @Step("Вводим поисковый запрос '{query}' в поле поиска")
     public BrandsPage enterSearchQuery(String query) {
         waitUntilElementToBeVisible(searchInput).sendKeys(query);
         logger.info("Введен поисковый запрос: " + query);
-        return this;
-    }
-
-    @Step("Проверяем отображение результатов поиска")
-    public BrandsPage verifySearchResultsCount() {
-        waitForSearchResultsToLoad();
-        waitUntilElementToBeVisible(searchResults.get(0)); // Дождаться отображения хотя бы одного результата
-        int resultCount = searchResults.size();
-        logger.info("Количество найденных результатов: " + resultCount);
-        System.out.println("Количество найденных результатов: " + resultCount);
-        return this;
-    }
-
-    @Step("Проверяем отображение результата поиска для: {expectedText}")
-    public BrandsPage verifySearchResult(String expectedText) {
-        waitForSearchResultsToLoad();
-        String xpath = String.format("//a[contains(@href, '/brands/%s') and .//mark[text()='%s']]", expectedText.toLowerCase(), expectedText);
-        WebElement resultElement = waitUntilElementToBeVisible(chromeDriverManager.getDriver().findElement(By.xpath(xpath)));
-        Assert.assertTrue("Результаты поиска не отображаются", resultElement.isDisplayed());
-        logger.info("Результат поиска отображается корректно для: " + expectedText);
-        return this;
-    }
-
-    private void waitForSearchResultsToLoad() {
-        JavascriptExecutor js = (JavascriptExecutor) chromeDriverManager.getDriver();
-
-        // Scroll to the bottom of the page to ensure lazy-loaded elements are visible
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
-
-        try {
-            // Wait for search results to be visible
-            wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(By.xpath("//li[@class='_0SdbU']")));
-        } catch (Exception e) {
-            logger.error("Ошибка при ожидании результатов поиска", e);
+        try{
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
+        return this;
     }
+
+    @Step("Добавляем бренд в избранное")
+    public BrandsPage verifySearchResultsCount() {
+        System.out.println(clarins.getText());
+        clarins.click();
+
+        return this;
+    }
+
+    public BrandsPage checkNotification(){
+        waitUntilElementToBeVisible(notification);
+        String title = notification.findElement(By.xpath(".//h2")).getText();
+        String info = notification.findElement(By.xpath(".//p")).getText();
+        Assert.assertTrue("Всплывающее сообщение не появилось или неверно", title.contains("войти или зарегистрироваться"));
+        Assert.assertTrue("Всплывающее сообщение не появилось или неверно", info.contains("Войдите в личный кабинет, чтобы добавить бренд в избранное. Позвоним или пришлём SMS. Введите последние четыре цифры номера телефона или код из SMS-сообщения."));
+        logger.info("Появилось всплывающее сообщение: " + info );
+        return this;
+    }
+
+
 }

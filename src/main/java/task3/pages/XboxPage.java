@@ -40,6 +40,7 @@ public class XboxPage extends BasePage {
         return pageManager.getxboxPage();
     }
 
+    //Здесь не работала корректно ссылка на первую приставку во владке, поэтому начинаем элемент с первого доступного элемента
     @Step("Вывести в лог первые 5 найденных товаров")
     public XboxPage logProducts() {
         boolean flag = true;
@@ -91,6 +92,7 @@ public class XboxPage extends BasePage {
         return this;
     }
 
+    @Step("Нажать на переход во вкладку 'Избранное'")
     public FavoritePage clickOnFavoriteButton(){
         moveToElement(favoruteButton);
         favoruteButton.click();

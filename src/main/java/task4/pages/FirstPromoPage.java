@@ -1,5 +1,6 @@
 package task4.pages;
 
+import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -11,6 +12,7 @@ public class FirstPromoPage extends BasePage{
     @FindBy(xpath = "//div[@class='R8dmm Ga1bx +M1JB']")
     private WebElement info;
 
+    @Step("Выводим информацию про первую ссылку")
     public FirstPromoPage getInfo() {
         try {
             Thread.sleep(1000);
