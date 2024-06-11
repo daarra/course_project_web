@@ -132,8 +132,8 @@ public class StartPage extends BasePage {
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
-//                    moveToElement(item);
-//                    item.click();
+                    moveToElement(item);
+                    item.click();
 
                     logger.info("Переход на страницу с меню: " + menuItem);
                     return pageManager.getxboxPage().verifyTitle();

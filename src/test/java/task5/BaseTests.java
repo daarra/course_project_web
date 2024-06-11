@@ -1,12 +1,15 @@
-package task4;
+package task5;
 
-import managers.*;
+import managers.ChromeDriverManager;
+import managers.InitManager;
+import managers.PageManager;
+import managers.TestPropManager;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
 public class BaseTests {
-    private final ChromeDriverManager edgeDriverManager = ChromeDriverManager.getInstance();
+    private final ChromeDriverManager chromeDriverManager = ChromeDriverManager.getInstance();
     protected PageManager pageManager = PageManager.getInstance();
     private final TestPropManager propManager = TestPropManager.getInstance();
 
@@ -18,18 +21,11 @@ public class BaseTests {
 
     @Before
     public void before(){
-        edgeDriverManager.getDriver().get("https://goldapple.ru/");
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        };
+        chromeDriverManager.getDriver().get("https://reqres.in/");
     }
 
     @AfterClass
     public static void after(){
         InitManager.quitFramework();
     }
-
-
 }

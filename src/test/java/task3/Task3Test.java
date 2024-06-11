@@ -6,30 +6,23 @@ import task3.BaseTests;
 
 public class Task3Test extends BaseTests {
 
-//    @Test
-//    @DisplayName("Тестирование страницы расписания на сайте Мосполитеха")
-//    public void test(){
-//        pageManager.getStartPage_task3()
-//                .verifyHomePageUrl()
-//                .clickOnCatalog()
-//                .clickOnMenuItem("Все для гейминга","Xbox","Игровые приставки")
-//                .logProducts()
-//                .clickOnWishListButton();
-//        try{
-//            Thread.sleep(200);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-
     @Test
-    @DisplayName("Тестирование страницы расписания на сайте Мосполитеха")
-    public void test(){
-        pageManager.getxboxPage().logProducts().clickOnWishListButton().clickOnFavoriteButton().removeFromWishListButton().updatePage();
-        try{
+    @DisplayName("Тестирование 'Яндекс-маркета'")
+    public void test() {
+        pageManager.getStartPage_task3()
+                .verifyHomePageUrl()
+                .clickOnCatalog()
+                .clickOnMenuItem("Все для гейминга", "Xbox", "Игровые приставки")
+                .logProducts()
+                .clickOnWishListButton()
+                .clickOnFavoriteButton()
+                .removeFromWishListButton()
+                .updatePage();
+        try {
             Thread.sleep(200);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-    }
 
+    }
 }

@@ -19,35 +19,68 @@ public class StartPage extends BasePage {
 
     private static final String EXPECTED_URL = "https://goldapple.ru/";
 
-    private static final String EXPECTED_URL2 = "https://goldapple.ru/novinki";
+    private static final String EXPECTED_URL2 = "https://goldapple.ru";
 
     @FindBy(xpath = "//*[@id=\"__layout\"]/div/main/section[3]/div/div/div[2]/div/section/header/div[1]/div/a/h2")
     private WebElement newCategory;
 
-    @FindBy(xpath = "//*[@id=\"__layout\"]/div/main/h1")
-    private WebElement pageTitle;
+    @FindBy(xpath = "//div[@class='ga-home-base-stories-circles-slider__wrapper R-96s O70YU']")
+    private WebElement slider;
+
+    @FindBy(xpath = "//*[@id='__layout']/div/header/div[3]/div/nav/ul/li[4]/a")
+    private WebElement promo;
+
+    @FindBy(xpath = "//*[@id='__layout']/div/header/div[3]/div/nav/ul/li[2]/a")
+    private WebElement brands;
+
+    @FindBy(xpath = "//button[@class='vJN8q nDH3D _2f6zk MB703 z8puL ic2Pk']")
+    private WebElement button;
+
 
     @Step("Проверяем, что открыта главная страница")
     public StartPage verifyHomePageUrl() {
-        // Ожидание загрузки заголовка страницы
-        waitUntilElementToBeVisible(pageTitle);
-
-        // Проверка заголовка страницы
-        Assert.assertEquals("Заголовок страницы не соответствует ожидаемому", "Золотое яблоко", pageTitle.getText());
+        moveToElement(slider);
+        boolean flag = slider.isDisplayed();
+        System.out.println(flag);
+        Assert.assertTrue("Slider element is not present on the page", flag);
 
         // Ожидание полной загрузки страницы (проверка всех ресурсов)
-        waitUntilPageLoadComplete();
 
         logger.info("Открыли главную страницу сайта");
         return this;
     }
 
 
-
     @Step("Нажать на каталог")
-    public StartPage clickOnCategory() {
+    public NewProductsPage clickOnCategory() {
         waitUntilElementToBeClickable(newCategory).click();
         logger.info("Кликнули на каталог Новинок");
+        try{
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return pageManager.getNewProductsPage();
+    }
+
+    @Step("Нажать на каталог")
+    public PromotionsPage clickOnPromo() {
+        scrollToElementJs(promo);
+        waitUntilElementToBeClickable(promo).click();
+        logger.info("Кликнули на каталог Акций");
+        try{
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return pageManager.getpromotionsPage();
+    }
+
+    @Step("Нажать на каталог")
+    public StartPage clickOnButtonLocation() {
+        scrollToElementJs(button);
+        waitUntilElementToBeClickable(button).click();
+        logger.info("Кликнули на каталог Брендов");
         try{
             Thread.sleep(10000);
         } catch (InterruptedException e) {
@@ -56,5 +89,17 @@ public class StartPage extends BasePage {
         return pageManager.getStartPage_task4();
     }
 
+    @Step("Нажать на каталог")
+    public BrandsPage clickOnBrends() {
+        scrollToElementJs(brands);
+        waitUntilElementToBeClickable(brands).click();
+        logger.info("Кликнули на каталог Брендов");
+        try{
+            Thread.sleep(10000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return pageManager.getBrandsPage();
+    }
 
 }

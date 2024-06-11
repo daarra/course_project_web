@@ -35,6 +35,9 @@ public class BasePage {
     protected void waitUntilPageLoadComplete() {
         wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));
     }
+    protected void waitUntilClassContains(WebElement element, String className) {
+        wait.until(ExpectedConditions.attributeContains(element, "class", className));
+    }
 
     protected WebElement waitUntilElementToBeVisible(WebElement element) {
         return wait.until(ExpectedConditions.visibilityOf(element));
@@ -47,6 +50,12 @@ public class BasePage {
 
     private void waitUntilUrlIsExpected(String expectedUrl) {
         wait.until(ExpectedConditions.urlToBe(expectedUrl));
+    }
+
+    protected void moveToElement(WebElement element) {
+        Actions actions = new Actions(chromeDriverManager.getDriver());
+        actions.moveToElement(element).perform();
+
     }
 
     private void assertUrlIsExpected(String expectedUrl) {
