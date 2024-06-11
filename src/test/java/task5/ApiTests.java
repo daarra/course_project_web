@@ -8,7 +8,6 @@ import io.restassured.response.Response;
 import org.junit.Test;
 
 import java.util.List;
-import java.util.Optional;
 
 import static io.restassured.RestAssured.given;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,8 +18,8 @@ public class ApiTests {
     private static final String BASE_URL = "https://reqres.in/api";
     private static final String USER_LIST_SCHEMA = "task5_resources/UserListSchema.json";
     private static final String USER_SINGLE_SCHEMA = "task5_resources/UserSingleSchema.json";
-    private static final String RESOURCE_LIST_SCHEMA = "task5_resources/ResourseListSchema.json";
-    private static final String RESOURCE_SINGLE_SCHEMA = "task5_resources/ResourseSingleSchema.json";
+    private static final String RESOURCE_LIST_SCHEMA = "task5_resources/ResourcesListSchema.json";
+    private static final String RESOURCE_SINGLE_SCHEMA = "task5_resources/ResourсesSingleSchema.json";
     private static final String CREATE_USER_SCHEMA = "task5_resources/CreateUserResponseSchema.json";
     private static final String UPDATE_USER_SCHEMA = "task5_resources/UpdateUserResponseSchema.json";
     private static final String REGISTER_SUCCESS_SCHEMA = "task5_resources/RegisterSuccessfulResponseSchema.json";
