@@ -21,7 +21,6 @@ public class PageManager {
     private task3.pages.FavoritePage favoritePage;
     private task4.pages.StartPage startPageTask4;
     private SearchProductsPage newProductsPage;
-    private task4.pages.PromotionsPage promotionsPage;
     private DescriptionSearchPage firstPromoPage;
     private task4.pages.BrandsPage brandsPage;
     private task5.pages.StartPage startPageTask5;
