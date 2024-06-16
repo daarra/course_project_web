@@ -10,6 +10,7 @@ import org.openqa.selenium.support.FindBy;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 public class DescriptionSearchPage extends BasePage{
     private static final Logger logger = Logger.getLogger(task4.pages.StartPage.class);
@@ -25,7 +26,6 @@ public class DescriptionSearchPage extends BasePage{
             e.printStackTrace();
         }
         boolean flag = true;
-        System.out.println(products.size());
         for (WebElement element : products) {
             String brandName = element.findElement(By.xpath(".//meta[@itemprop='name']")).getAttribute("content");
             String price = element.findElement(By.xpath(".//meta[@itemprop='price']")).getAttribute("content");
@@ -35,8 +35,11 @@ public class DescriptionSearchPage extends BasePage{
             String fullText = parentDiv.getText().trim();
 
             String productDescription = fullText.replace(brandName, "").trim();
-            assertEquals("Описание продуктов не соответствует первому из каталога поиска", firstDescription, productDescription);
-            assertEquals("Описание продуктов не соответствует первому из каталога поиска", firstPrice, price);
+            if (flag == true){
+                assertTrue("Описание продуктов не соответствует первому из каталога поиска", productDescription.equals(firstDescription));
+                assertEquals("Описание продуктов не соответствует первому из каталога поиска", firstPrice, price);
+                flag = false;
+            }
         }
         logger.info("Проверили содержание поискового слова в товарах");
         return this;

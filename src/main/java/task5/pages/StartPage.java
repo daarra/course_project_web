@@ -35,6 +35,11 @@ public class StartPage extends BasePage {
 
     @Step("Проверка открытия страницы авторизации")
     public StartPage checkOpenPage(){
+        try{
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         checkOpenPage("Test your front-end against a real API", title);
         logger.info("Проверка открытия страницы");
         return this;

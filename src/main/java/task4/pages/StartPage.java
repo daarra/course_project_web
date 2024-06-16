@@ -78,6 +78,7 @@ public class StartPage extends BasePage {
 
     @Step("Переходим в каталог")
     public StartPage moveToCatalog() {
+        clickOnButtonLocation();
         scrollToElementJs(catalogButton);
         waitUntilElementToBeClickable(catalogButton).click();
 
@@ -129,6 +130,8 @@ public class StartPage extends BasePage {
                 return pageManager.getCategoryPage();
             }
 
-        } return pageManager.getCategoryPage();
+        }
+        Assert.fail("Не удалось найти категорию " + name);
+        return pageManager.getCategoryPage();
     }
 }

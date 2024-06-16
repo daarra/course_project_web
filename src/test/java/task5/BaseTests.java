@@ -23,7 +23,7 @@ public class BaseTests {
     public void before(){
         chromeDriverManager.getDriver().get("https://reqres.in/");
         try {
-            Thread.sleep(10000);
+            Thread.sleep(15000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         };

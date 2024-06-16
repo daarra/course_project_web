@@ -19,13 +19,10 @@ public class BrandsPage extends BasePage {
     @FindBy(xpath = "//input[@placeholder='найти бренды']")
     private WebElement searchInput;
 
-    @FindBy(xpath = "//button[contains(@class, 'Glpeq')]")
-    private WebElement searchButton;
+    @FindBy(xpath = "//div[@class='ga-alphabet-list']//a[contains(., 'Clarins')]/preceding-sibling::button")
+    private List<WebElement> clarinsElements;
 
-    @FindBy(xpath = "//*[@id=\"__layout\"]/div/main/div[2]/div/div[2]/div/div/div/div/div[55]/div/ul/li/button")
-    private WebElement clarins;
-
-    @FindBy(xpath = "//div[@class='KwHbB']")
+    @FindBy(xpath = "//form[@novalidate='novalidate']")
     private WebElement notification;
 
     @Step("Вводим поисковый запрос '{query}' в поле поиска")
@@ -42,8 +39,10 @@ public class BrandsPage extends BasePage {
 
     @Step("Добавляем бренд в избранное")
     public BrandsPage verifySearchResultsCount() {
-        System.out.println(clarins.getText());
-        clarins.click();
+        WebElement firstClarins = clarinsElements.get(0);
+        WebElement secondClarins = clarinsElements.get(1);
+        System.out.println(secondClarins.getText());
+        secondClarins.click();
 
         return this;
     }
