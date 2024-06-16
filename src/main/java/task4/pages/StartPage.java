@@ -117,6 +117,7 @@ public class StartPage extends BasePage {
         return pageManager.getBrandsPage();
     }
 
+    @Step("Поиск нужной категории")
     public CategoryPage findNameCategory(String name) {
         System.out.println(categoryList.size());
         for (WebElement element : categoryList) {

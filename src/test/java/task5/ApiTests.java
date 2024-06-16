@@ -15,7 +15,7 @@
 //
 //public class ApiTests {
 //
-//    private static final String BASE_URL = "https://reqres.in/api";
+//    private static final String BASE_URL = "https:reqres.in/api";
 //    private static final String USER_LIST_SCHEMA = "task5_resources/UserListSchema.json";
 //    private static final String USER_SINGLE_SCHEMA = "task5_resources/UserSingleSchema.json";
 //    private static final String RESOURCE_LIST_SCHEMA = "task5_resources/ResourcesListSchema.json";
@@ -61,7 +61,7 @@
 //        assertThat(user.getEmail()).isEqualTo("janet.weaver@reqres.in");
 //        assertThat(user.getFirst_name()).isEqualTo("Janet");
 //        assertThat(user.getLast_name()).isEqualTo("Weaver");
-//        assertThat(user.getAvatar()).isEqualTo("https://reqres.in/img/faces/2-image.jpg");
+//        assertThat(user.getAvatar()).isEqualTo("https:reqres.in/img/faces/2-image.jpg");
 //    }
 //
 //    @Test
@@ -145,35 +145,35 @@
 //                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(CREATE_USER_SCHEMA))
 //                .extract().response();
 //
-//        // Извлекаем значение из ответа и преобразуем его в строку перед сравнением
+//         Извлекаем значение из ответа и преобразуем его в строку перед сравнением
 //        String name = response.jsonPath().get("name");
 //        assertThat(name).isEqualTo("morpheus");
 //    }
 //
-////    @Test
-////    @DisplayName("Обновить пользователя PUT")
-////    public void updateUserPut() {
-////        UserRequest rq = UserRequest.builder()
-////                .name("morpheus")
-////                .job("zion resident")
-////                .build();
-////
-////        UserResponse rs = given()
-////                .contentType(ContentType.JSON)
-////                .body(rq)
-////                .when()
-////                .put(BASE_URL + "/users/2")
-////                .then()
-////                .statusCode(200)
-////                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(UPDATE_USER_SCHEMA))
-////                .extract().as(UserResponse.class);
-////        // Извлекаем значение из ответа и преобразуем его в строку перед сравнением
-////        String name = response.jsonPath().get("name");
-////        assertThat(name).isEqualTo("morpheus");
-////
-////        assertThat(rs).isNotNull();
-////        assertUserResponse(rs, rq.getName(), rq.getJob());
-////    }
+//////    @Test
+//////    @DisplayName("Обновить пользователя PUT")
+//////    public void updateUserPut() {
+//////        UserRequest rq = UserRequest.builder()
+//////                .name("morpheus")
+//////                .job("zion resident")
+//////                .build();
+//////
+//////        UserResponse rs = given()
+//////                .contentType(ContentType.JSON)
+//////                .body(rq)
+//////                .when()
+//////                .put(BASE_URL + "/users/2")
+//////                .then()
+//////                .statusCode(200)
+//////                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(UPDATE_USER_SCHEMA))
+//////                .extract().as(UserResponse.class);
+//////         Извлекаем значение из ответа и преобразуем его в строку перед сравнением
+//////        String name = response.jsonPath().get("name");
+//////        assertThat(name).isEqualTo("morpheus");
+//////
+//////        assertThat(rs).isNotNull();
+//////        assertUserResponse(rs, rq.getName(), rq.getJob());
+//////    }
 //
 //    @Test
 //    @DisplayName("Обновить пользователя PATCH")
@@ -193,14 +193,14 @@
 //                .body(JsonSchemaValidator.matchesJsonSchemaInClasspath(UPDATE_USER_SCHEMA))
 //                .extract().as(UserResponse.class);
 //
-//        // Извлекаем значение поля "name" как строку из JSON-ответа
+//         Извлекаем значение поля "name" как строку из JSON-ответа
 //        String name = rs.getName();
 //
-//        // Проверяем, что значение "name" не пустое и соответствует ожидаемому значению
+//         Проверяем, что значение "name" не пустое и соответствует ожидаемому значению
 //        assertThat(name).isNotNull();
 //        assertThat(name).isEqualTo("morpheus");
 //
-//        // Проверяем остальные поля ответа, если это необходимо
+//         Проверяем остальные поля ответа, если это необходимо
 //    }
 //
 //

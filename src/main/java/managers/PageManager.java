@@ -9,7 +9,6 @@ import task2.pages.SchedulePage;
 import task4.pages.BrandsPage;
 import task4.pages.DescriptionSearchPage;
 import task4.pages.SearchProductsPage;
-import task4.pages.PromotionsPage;
 
 public class PageManager {
     private static PageManager INSTANCE = null;
@@ -102,14 +101,6 @@ public class PageManager {
         }
         return newProductsPage;
     }
-
-    public task4.pages.PromotionsPage getpromotionsPage() {
-        if (promotionsPage == null) {
-            promotionsPage = new PromotionsPage();
-        }
-        return promotionsPage;
-    }
-
 
     public DescriptionSearchPage getDescriptionSearchPage() {
         if (firstPromoPage == null) {
