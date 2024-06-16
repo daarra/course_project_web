@@ -32,7 +32,7 @@ public class Task4Test extends BaseTests{
     @Test
     @DisplayName("Тестирование сайта интернет-магазина 'Золотое яблоко'. Тестирование поиска брендов")
     public void test3() {
-        pageManager.getStartPage_task4().verifyHomePageUrl().clickOnButtonLocation().clickOnBrands().enterSearchQuery("Clarins").verifySearchResultsCount().checkNotification();
+        pageManager.getStartPage_task4().verifyHomePageUrl().clickOnBrands().enterSearchQuery("Clarins").verifySearchResultsCount().checkNotification();
 
         try {
             Thread.sleep(10000);

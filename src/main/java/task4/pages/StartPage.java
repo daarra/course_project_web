@@ -78,7 +78,7 @@ public class StartPage extends BasePage {
 
     @Step("Переходим в каталог")
     public StartPage moveToCatalog() {
-        clickOnButtonLocation();
+//        clickOnButtonLocation();
         scrollToElementJs(catalogButton);
         waitUntilElementToBeClickable(catalogButton).click();
 
