@@ -11,7 +11,7 @@ import java.util.List;
 
 public class FavoritePage extends BasePage{
     private static final Logger logger = Logger.getLogger(task3.pages.StartPage.class);
-    @FindBy(xpath = "//span[@class='_1_C0_ _1n-yE _33-CL AODiB']")
+    @FindBy(xpath = "//div[@data-apiary-widget-name='@light/WishlistHeader']")
     private WebElement title;
 
     @FindBy(xpath = "//div[@data-zone-name='productSnippet']")
@@ -53,7 +53,7 @@ public class FavoritePage extends BasePage{
             WebElement product = productList.get(i);
             moveToElement(product);
             String title = product.findElement(By.xpath(".//h3")).getText();
-            String price = product.findElement(By.xpath(".//span[@class='_1ArMm']")).getText();;
+            String price = product.findElement(By.xpath(".//span[@data-auto='snippet-price-current']")).getText();;
             if(title.equals(firstTitle) && (price.equals(firstPrice))){
                 productFirst = product;
                 logger.info("Проверка");
@@ -71,11 +71,6 @@ public class FavoritePage extends BasePage{
         wishlistButton = productFirst.findElement(By.xpath(".//button"));
         wishlistButton.click();
         logger.info("Кнопка 'Убрать из избранного' нажата");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         waitUntilElementToBeVisible(notification);
         String notificationText = notification.getText();
         System.out.println(notificationText);

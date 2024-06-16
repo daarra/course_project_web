@@ -49,7 +49,7 @@ public class XboxPage extends BasePage {
             moveToElement(product);
 
             String title = product.findElement(By.xpath(".//h3")).getText();
-            String price = product.findElement(By.xpath(".//span[@class='_1ArMm']")).getText();
+            String price = product.findElement(By.xpath(".//span[@data-auto='snippet-price-current']")).getText();
             if(flag == true){
                 firstProduct = product;
                 firstTitle = title;
@@ -60,7 +60,7 @@ public class XboxPage extends BasePage {
 
         }
         String title = firstProduct.findElement(By.xpath(".//h3")).getText();
-        String price = firstProduct.findElement(By.xpath(".//span[@class='_1ArMm']")).getText();
+        String price = firstProduct.findElement(By.xpath(".//span[@data-auto='snippet-price-current']")).getText();
         logger.info(title + price);
         logger.info("Название первого товара: " + firstTitle + ". Цена первого товара: " + firstPrice);
         return this;

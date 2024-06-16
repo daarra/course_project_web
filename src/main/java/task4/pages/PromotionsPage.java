@@ -4,14 +4,10 @@ import io.qameta.allure.Step;
 import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.apache.log4j.Logger;
 
-import java.time.Duration;
 import java.util.List;
 
 public class PromotionsPage extends BasePage {
@@ -56,10 +52,10 @@ public class PromotionsPage extends BasePage {
     }
 
     @Step("Перейти по ссылке на первую акцию")
-    public FirstPromoPage goToFirstPromotion() {
+    public PromotionsPage goToFirstPromotion() {
         waitUntilElementToBeClickable(firstPromo).click();
         logger.info("Кликнули на первую акцию");
-        return pageManager.getFirstPromoPage();
+        return this;
     }
 
 }

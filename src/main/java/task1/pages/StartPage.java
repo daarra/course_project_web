@@ -1,5 +1,6 @@
 package task1.pages;
 
+import org.checkerframework.checker.units.qual.A;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -65,7 +66,7 @@ public class StartPage extends BasePage {
             String inputName = menuItem.findElement(By.tagName("input")).getAttribute("name");
             if (inputName.equalsIgnoreCase(nameInput)) {
                 String spanClass = menuItem.findElement(By.tagName("span")).getAttribute("class");
-                Assert.assertTrue("Элемент списка " + nameInput + " зачеркнут", spanClass.contains("done-false"));
+                Assert.assertEquals("Элемент списка" + nameInput + "зачеркнут", "done-false", spanClass);
                 menuItem.findElement(By.xpath(".//input[@type='checkbox']")).click();
                 break;
             }
@@ -78,7 +79,7 @@ public class StartPage extends BasePage {
             if (inputName.equalsIgnoreCase(nameInput)) {
                 String spanClass = menuItem.findElement(By.tagName("span")).getAttribute("class");
                 Assert.assertEquals("Количество оставшихся элементов не уменьшилось на один", initialCount - 1, newCount);
-                Assert.assertTrue("Элемент списка " + nameInput + " не становится зачеркнутым", spanClass.contains("true"));
+                Assert.assertEquals("Элемент списка" + nameInput + "не зачеркнут", "done-true", spanClass);
                 break;
             }
         }

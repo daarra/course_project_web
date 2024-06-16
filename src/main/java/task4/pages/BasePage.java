@@ -18,6 +18,11 @@ public class BasePage {
     protected WebDriverWait wait = new WebDriverWait(chromeDriverManager.getDriver(), Duration.ofSeconds(10), Duration.ofMillis(500));
     protected Actions action = new Actions(chromeDriverManager.getDriver());
 
+    protected static WebElement firstProduct;
+    protected static String firstTitle;
+    protected static String firstPrice;
+    protected static String firstDescription;
+
     public BasePage() {
         PageFactory.initElements(chromeDriverManager.getDriver(), this);
     }
@@ -31,6 +36,13 @@ public class BasePage {
     protected WebElement waitUntilElementToBeClickable(WebElement element) {
         return wait.until(ExpectedConditions.elementToBeClickable(element));
     }
+
+    void hoverOverElement(WebElement element) {
+        String mouseOverScript = "var event = new MouseEvent('mouseover', {view: window, bubbles: true, cancelable: true}); arguments[0].dispatchEvent(event);";
+        ((JavascriptExecutor) chromeDriverManager).executeScript(mouseOverScript, element);
+        waitUntilElementToBeVisible(element); // Убедимся, что элемент видим после наведения
+    }
+
 
     protected void waitUntilPageLoadComplete() {
         wait.until(driver -> ((JavascriptExecutor) driver).executeScript("return document.readyState").equals("complete"));

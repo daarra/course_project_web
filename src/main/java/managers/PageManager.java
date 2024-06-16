@@ -7,8 +7,8 @@ package managers;
 import task2.pages.GroupSchedulePage;
 import task2.pages.SchedulePage;
 import task4.pages.BrandsPage;
-import task4.pages.FirstPromoPage;
-import task4.pages.NewProductsPage;
+import task4.pages.DescriptionSearchPage;
+import task4.pages.SearchProductsPage;
 import task4.pages.PromotionsPage;
 
 public class PageManager {
@@ -21,11 +21,12 @@ public class PageManager {
     private task3.pages.XboxPage xboxPage;
     private task3.pages.FavoritePage favoritePage;
     private task4.pages.StartPage startPageTask4;
-    private task4.pages.NewProductsPage newProductsPage;
+    private SearchProductsPage newProductsPage;
     private task4.pages.PromotionsPage promotionsPage;
-    private task4.pages.FirstPromoPage firstPromoPage;
+    private DescriptionSearchPage firstPromoPage;
     private task4.pages.BrandsPage brandsPage;
     private task5.pages.StartPage startPageTask5;
+    private task4.pages.CategoryPage categoryPage;
 
 
     private PageManager() {
@@ -95,9 +96,9 @@ public class PageManager {
         return startPageTask4;
     }
 
-    public task4.pages.NewProductsPage getNewProductsPage() {
+    public SearchProductsPage getSearchProductsPage() {
         if (newProductsPage == null) {
-            newProductsPage = new NewProductsPage();
+            newProductsPage = new SearchProductsPage();
         }
         return newProductsPage;
     }
@@ -110,9 +111,9 @@ public class PageManager {
     }
 
 
-    public task4.pages.FirstPromoPage getFirstPromoPage() {
+    public DescriptionSearchPage getDescriptionSearchPage() {
         if (firstPromoPage == null) {
-            firstPromoPage = new FirstPromoPage();
+            firstPromoPage = new DescriptionSearchPage();
         }
         return firstPromoPage;
     }
@@ -129,5 +130,12 @@ public class PageManager {
             startPageTask5 = new task5.pages.StartPage();
         }
         return startPageTask5;
+    }
+
+    public task4.pages.CategoryPage getCategoryPage() {
+        if (categoryPage == null) {
+            categoryPage = new task4.pages.CategoryPage();
+        }
+        return categoryPage;
     }
 }

@@ -29,6 +29,7 @@ public class StartPage extends BasePage {
     @FindBy(xpath = "//div[@data-baobab-name='linkSnippet']")
     private List<WebElement> xboxItemList;
 
+
     private static final String EXPECTED_URL = "https://market.yandex.ru/";
 
     @Step("Проверяем, что открыта главная страница")
